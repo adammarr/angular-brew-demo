@@ -1,0 +1,118 @@
+
+md-toolbar {
+	&, &.md-default-theme { background-color: rgba(255,255,255,.1); }
+	h3 {
+		cursor: pointer;
+	}
+}
+md-content {
+	top: -64px;
+
+	&.full {
+		background: linear-gradient(to bottom, #421309, #421309 80%, rgba(255,255,255,0));
+	}
+
+	.banner {
+		background: #421309 url(/assets/img/beerbanner.jpg) no-repeat 0 0;
+		width: 100%;
+		height: 600px;
+	}
+
+	&.full .banner {
+		height: auto;
+		min-height: 800px;
+		padding-top: 74px;
+		background-color: transparent;
+
+		.panel {
+			max-width: 1040px;
+		  	margin: 0 auto 20px;
+		  	background-color: rgba(255,255,255,.7);
+		  	border-radius: 5px;
+		  	padding: 5px 5% 23px;
+		}
+	}
+
+	.section {
+		max-width: 1140px;
+		margin: 0 auto;
+		padding: 0 5%;
+		box-sizing: content-box;
+		&>h1 { text-align: center; }
+		.city-filter {
+			text-align: right;
+			margin: 0 10px 5px 0;
+			.clear-btn { color: #77e; }
+			button {
+				margin: 0 15px;
+				color: #999;
+				&.selected { color: #000; }
+			}
+		}
+		md-grid-tile {
+			overflow: hidden;
+			.grid-details {
+				width: 100%;
+				height: 100%;
+				padding: 5%;
+				color: #fff;
+				background-color: rgba(0,0,0,.6);
+				position: relative;
+				left: 101%;
+				transition: .3s ease-out left;
+				h3 {
+					margin: 5px 0;
+					border-bottom: 1px solid #fff;
+				}
+				p { margin: 3px 7px; }
+				div[layout] {
+					margin-top: 10px;
+				}
+			}
+			&:hover .grid-details {
+				left: 0;
+			}
+			md-grid-tile-footer h3 {
+				font-weight: bold;
+				span {
+					position: absolute;
+				  	right: 15px;
+				  	font-weight: normal;
+				  	top: 16px;
+				}
+			}
+		}
+		.tile0 { background-image: url(/assets/img/tile0.jpg); }
+		.tile1 { background-image: url(/assets/img/tile1.jpg); }
+		.tile2 { background-image: url(/assets/img/tile2.jpg); }
+		.tile3 { background-image: url(/assets/img/tile3.jpg); }
+		.tile4 { background-image: url(/assets/img/tile4.jpg); }
+
+		.my-animation.ng-enter, .my-animation.ng-move, .my-animation.ng-leave {
+			transition: 500ms ease-out;
+			transition-property: opacity, -webkit-filter;
+		}
+		.my-animation.ng-enter, .my-animation.ng-move, .my-animation.ng-leave.ng-leave-active {
+			opacity: 0;
+			-webkit-filter: blur(20px);
+		}
+		.my-animation.ng-enter.ng-enter-active, .my-animation.ng-move.ng-move-active, .my-animation.ng-leave {
+			opacity:1;
+			-webkit-filter: blur(0px);
+		}
+	}
+}
+
+footer {
+	max-width: 1140px;
+	margin: 20px auto;
+	padding-top: 15px;
+	border-top: 1px solid #bbb;
+	p {
+		text-align: center;
+		font-size: .8em;
+		margin: 0;
+		color: #ccc;
+		text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+	}
+}

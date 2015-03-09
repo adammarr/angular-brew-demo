@@ -1,0 +1,106 @@
+md-toolbar, md-toolbar.md-default-theme {
+  background-color: rgba(255, 255, 255, 0.1); }
+md-toolbar h3 {
+  cursor: pointer; }
+
+md-content {
+  top: -64px; }
+  md-content.full {
+    background: -webkit-linear-gradient(top, #421309, #421309 80%, rgba(255, 255, 255, 0));
+    background: linear-gradient(to bottom, #421309, #421309 80%, rgba(255, 255, 255, 0)); }
+  md-content .banner {
+    background: #421309 url(/assets/img/beerbanner.jpg) no-repeat 0 0;
+    width: 100%;
+    height: 600px; }
+  md-content.full .banner {
+    height: auto;
+    min-height: 800px;
+    padding-top: 74px;
+    background-color: transparent; }
+    md-content.full .banner .panel {
+      max-width: 1040px;
+      margin: 0 auto 20px;
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 5px;
+      padding: 5px 5% 23px; }
+  md-content .section {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 5%;
+    box-sizing: content-box; }
+    md-content .section > h1 {
+      text-align: center; }
+    md-content .section .city-filter {
+      text-align: right;
+      margin: 0 10px 5px 0; }
+      md-content .section .city-filter .clear-btn {
+        color: #77e; }
+      md-content .section .city-filter button {
+        margin: 0 15px;
+        color: #999; }
+        md-content .section .city-filter button.selected {
+          color: #000; }
+    md-content .section md-grid-tile {
+      overflow: hidden; }
+      md-content .section md-grid-tile .grid-details {
+        width: 100%;
+        height: 100%;
+        padding: 5%;
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.6);
+        position: relative;
+        left: 101%;
+        -webkit-transition: .3s ease-out left;
+                transition: .3s ease-out left; }
+        md-content .section md-grid-tile .grid-details h3 {
+          margin: 5px 0;
+          border-bottom: 1px solid #fff; }
+        md-content .section md-grid-tile .grid-details p {
+          margin: 3px 7px; }
+        md-content .section md-grid-tile .grid-details div[layout] {
+          margin-top: 10px; }
+      md-content .section md-grid-tile:hover .grid-details {
+        left: 0; }
+      md-content .section md-grid-tile md-grid-tile-footer h3 {
+        font-weight: bold; }
+        md-content .section md-grid-tile md-grid-tile-footer h3 span {
+          position: absolute;
+          right: 15px;
+          font-weight: normal;
+          top: 16px; }
+    md-content .section .tile0 {
+      background-image: url(/assets/img/tile0.jpg); }
+    md-content .section .tile1 {
+      background-image: url(/assets/img/tile1.jpg); }
+    md-content .section .tile2 {
+      background-image: url(/assets/img/tile2.jpg); }
+    md-content .section .tile3 {
+      background-image: url(/assets/img/tile3.jpg); }
+    md-content .section .tile4 {
+      background-image: url(/assets/img/tile4.jpg); }
+    md-content .section .my-animation.ng-enter, md-content .section .my-animation.ng-move, md-content .section .my-animation.ng-leave {
+      -webkit-transition: 500ms ease-out;
+              transition: 500ms ease-out;
+      -webkit-transition-property: opacity, -webkit-filter;
+              transition-property: opacity, -webkit-filter; }
+    md-content .section .my-animation.ng-enter, md-content .section .my-animation.ng-move, md-content .section .my-animation.ng-leave.ng-leave-active {
+      opacity: 0;
+      -webkit-filter: blur(20px); }
+    md-content .section .my-animation.ng-enter.ng-enter-active, md-content .section .my-animation.ng-move.ng-move-active, md-content .section .my-animation.ng-leave {
+      opacity: 1;
+      -webkit-filter: blur(0px); }
+
+footer {
+  max-width: 1140px;
+  margin: 20px auto;
+  padding-top: 15px;
+  border-top: 1px solid #bbb; }
+  footer p {
+    text-align: center;
+    font-size: .8em;
+    margin: 0;
+    color: #ccc;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2); }
+
+
+/*# sourceMappingURL=maps/main-c3910c19.css.map */

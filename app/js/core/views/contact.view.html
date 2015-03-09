@@ -1,0 +1,69 @@
+<div layout="column" layout-fill>
+	<br-top-nav></br-top-nav>
+  	<md-content class="full">
+  		<div class="banner">
+
+  			<div class="panel">
+  				<h1>Contact Us</h1>
+
+  				<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+
+				<div layout="column" layout-fill>
+	  				<md-whiteframe class="md-whiteframe-z2" layout layout-align="center center" ng-if="!!contact.message">
+				    	<p>{{contact.message}}</p>
+				  	</md-whiteframe>
+			  	</div>
+
+  				<form name="contactForm" ng-model-options="{ updateOn: 'blur' }" ng-submit="contact.send()">
+  					<div layout layout-sm="column">
+				        <md-input-container flex>
+				        	<label>First Name</label>
+				        	<input ng-model="contact.input.firstName" name="firstName" ng-pattern="/^[a-zA-Z'-]*$/" required>
+				        	<div ng-messages="contactForm.firstName.$error" ng-if="!contactForm.firstName.$pristine || contactForm.$submitted">
+				        		<div ng-message="required">First Name is required.</div>
+				        		<div ng-message="pattern">First Name is invalid.</div>
+				        	</div>
+				        </md-input-container>
+				        <md-input-container flex>
+				        	<label>Last Name</label>
+				        	<input ng-model="contact.input.lastName" name="lastName" required>
+				        	<div ng-messages="contactForm.lastName.$error" ng-if="!contactForm.lastName.$pristine || contactForm.$submitted">
+				        		<div ng-message="required">Last Name is required.</div>
+				        	</div>
+				        </md-input-container>
+				    </div>
+				    <md-input-container flex>
+        				<label>Address</label>
+        				<input ng-model="contact.input.address" name="address" ng-model-options="{ updateOn: 'default' }" required>
+        				<div ng-messages="contactForm.address.$error" ng-if="!contactForm.address.$pristine || contactForm.$submitted">
+			        		<div ng-message="required">Address is required.</div>
+			        	</div>
+      				</md-input-container>
+      				<div layout layout-sm="column">
+        				<md-input-container flex>
+          					<label>City</label>
+          					<input ng-model="contact.input.city">
+        				</md-input-container>
+	        			<md-input-container flex>
+	          				<label>State</label>
+	          				<input ng-model="contact.input.state">
+	        			</md-input-container>
+	        			<md-input-container flex>
+	          				<label>Postal Code</label>
+	          				<input ng-model="contact.input.postalCode">
+	        			</md-input-container>
+      				</div>
+        			<md-input-container flex>
+    					<label>Message</label>
+    					<textarea ng-model="contact.input.message" columns="1" md-maxlength="250"></textarea>
+  					</md-input-container>
+  					<md-button flex class="md-raised md-primary">Submit</md-button>
+  				</form>
+
+  				<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+
+  			</div>
+  			
+  		</div>
+  	</md-content>
+</div>

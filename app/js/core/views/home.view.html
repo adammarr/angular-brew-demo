@@ -1,0 +1,36 @@
+<div layout="column" layout-fill>
+	<br-top-nav></br-top-nav>
+  	<md-content>
+  		<div class="banner">
+  			
+  		</div>
+  		<div class="section">
+	  		<h1 class="center">Local Breweries</h1>
+	  		<!--
+	  		<input ng-model="home.breweries[0].name"/>
+	  		<input ng-model="home.cityFilter.name"/>
+	  		-->
+	  		<div class="city-filter">
+	  			<md-button ng-if="!!home.cityFilter" ng-click="home.setCityFilter()" class="clear-btn">Clear</md-button>
+	  			<md-button ng-repeat="city in home.cities" ng-click="home.setCityFilter(city)" class="{{ {true: 'selected'}[home.cityFilter.address.city === city] }}">{{city}}</md-button>
+	  		</div>
+	  		<md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="4" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+	  			<md-grid-tile ng-repeat="brewery in home.breweries | filter:home.cityFilter" class="tile{{$index % 5}} my-animation" md-rowspan="1" md-colspan="1">
+	  				<div class="grid-details">
+		  				<h3>{{brewery.name}}</h3>
+		  				<p>{{brewery.address.street}}</p>
+		  				<p>{{brewery.address.city}}, {{brewery.address.state}} {{brewery.address.postal}}</p>
+		  				<p>{{brewery.phone}}</p>
+		  				<div layout="row" layout-align="space-around center">
+		  					<md-button class="md-raised md-warn" ng-click="home.removeBrewery(brewery._id)">Remove</md-button>
+		  					<md-button class="md-raised md-primary">Map</md-button>
+		  				</div>
+		  			</div>
+	      			<md-grid-tile-footer>
+	        			<h3>{{brewery.name}} <span>{{brewery.address.city}}</span></h3>
+	      			</md-grid-tile-footer>
+	    		</md-grid-tile>
+	    	</md-grid-list>
+    	</div>
+  	</md-content>
+</div>
