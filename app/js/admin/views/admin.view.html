@@ -1,0 +1,29 @@
+<div>
+	<md-content>
+	    <md-toolbar class="tb-admin">
+	      <h2 class="md-toolbar-tools">
+	        <span>Toolbar</span>
+	      </h2>
+	    </md-toolbar>
+	    <div layout="row" class="edit-panel">
+	    	<div flex>
+	    		<h2>Brewery List</h2>
+	    		<md-content md-theme="docs-dark" class="md-padding" layout="row">
+    				<md-input-container>
+      					<label>Filter by Name</label>
+      					<input ng-model="admin.filter.name">
+    				</md-input-container>
+  				</md-content>
+	    		<div class="edit-list" layout="row" ng-repeat="brewery in admin.breweries | filter:admin.filter">
+	    			<div flex="15" class="{{ {true: 'active', false: 'inactive'}[brewery.isActive] }}">{{ {true: 'ACTIVE', false: 'INACTIVE'}[brewery.isActive] }}</div>
+	    			<div flex="25">{{brewery.name}}</div>
+	    			<div flex="50">{{brewery.address.city}}, {{brewery.address.state}}</div>
+	    			<div flex="10"><a ui-sref="adminbrew.edit({id: brewery._id})">Edit</a></div>
+	    		</div>
+	    	</div>
+	    	<div flex>
+	    		<ui-view/>
+	    	</div>
+	    </div>
+	</md-content>
+</div>

@@ -1,0 +1,15 @@
+.edit-panel {
+	max-width: 1040px;
+	margin: 0 auto;
+	>div:first-of-type { border-right: 1px solid #ccc; }
+	.edit-list {
+		margin: 5px 0;
+		.active { background-color: #259b24; color: #fff; }
+		.inactive { background-color: #d0f8ce; }
+		a { display: none; text-decoration: none; color: #999; }
+		&:hover {
+			background-color: #eee;
+			a { display: block; }
+		}
+	}
+}
