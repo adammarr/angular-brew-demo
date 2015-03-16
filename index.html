@@ -9,29 +9,28 @@
 		<title>Angular Brew Demo</title>
 
 		<!-- bower:css -->
-	  	<link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
-	  	<link rel="stylesheet" href="bower_components/toastr/toastr.min.css">
+	  	<link rel="stylesheet" href="dist/lib/css/vendor-28423cc2.css">
 	  	<!-- endinject -->
 
 		<!-- app:css -->
-		<link rel="stylesheet" href="dist/css/main-c3910c19.css">
+		<link rel="stylesheet" href="dist/css/style-4b2926f3.css">
 		<!-- endinject -->
 
 		<link rel="shortcut icon" href="favicon.ico"/>
 	</head>
 	<body ng-cloak>
-		<div ui-view class="main-cont-ani"></div>
+		<div ui-view class="main-cont-ani" autoscroll="true"></div>
 
 		<footer>
 			<div layout="row">
 				<div flex>
-					<p>Footer 1</p>
+					<p><a ui-sref="home">Home</a></p>
 					<p>About 1</p>
 					<p>Some Link 1</p>
 					<p>Click Here 1</p>
 				</div>
 				<div flex>
-					<p>Footer 2</p>
+					<p><a ui-sref="adminbrew">Admin</a></p>
 					<p>About 2</p>
 					<p>Some Link 2</p>
 					<p>Click Here 2</p>
@@ -44,28 +43,11 @@
 		</div>
 
 		<!-- bower:js -->
-	  	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-	  	<script src="bower_components/angular/angular.min.js"></script>
-	  	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
-	  	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
-	  	<script src="bower_components/angular-messages/angular-messages.min.js"></script>
-	  	<script src="bower_components/angular-aria/angular-aria.min.js"></script>
-	  	<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-	  	<script src="bower_components/angular-material/angular-material.min.js"></script>
-	  	<script src="bower_components/angular-mocks/angular-mocks.js"></script>
-	  	<script src="bower_components/toastr/toastr.min.js"></script>
+	  	<script src="dist/lib/js/vendor-6aad16ba.js"></script>
 	  	<!-- endinject -->
 
 	  	<!-- app:js -->
-	  	<script src="app/js/brew.js"></script>
-	  	<script src="app/js/core/core.module.js"></script>
-	  	<script src="app/js/mock/mock.module.js"></script>
-	  	<script src="app/js/core/controllers/contact.ctrl.js"></script>
-	  	<script src="app/js/core/controllers/home.ctrl.js"></script>
-	  	<script src="app/js/core/models/breweries.model.js"></script>
-	  	<script src="app/js/core/directives/brTopNav.directive.js"></script>
-	  	<script src="app/js/core/services/brewery.service.js"></script>
-	  	<script src="app/js/mock/data/breweries.data.js"></script>
+	  	<script src="dist/js/app-e67b0f9e.js"></script>
 	  	<!-- endinject -->
 	</body>
 </html>

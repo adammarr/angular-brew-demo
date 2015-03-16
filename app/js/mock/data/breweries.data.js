@@ -8,14 +8,13 @@
     /* @ngInject */
     function breweryData() {
         var service = {
-            getBreweries: getBreweries
+            getBreweries: getBreweries,
+            getBrewery: getBrewery,
+            removeBrewery: removeBrewery,
+            updateBrewery: updateBrewery
         };
-        return service;
 
-        ////////////////
-
-        function getBreweries() {
-        	return [
+        var breweries = [
 			  {
 			    "_id": "54fbce59a6429d11b08bd555",
 			    "isActive": true,
@@ -421,7 +420,42 @@
 			      "non"
 			    ]
 			  }
-			]
+			];
+
+        return service;
+
+        ////////////////
+
+        function getBreweries() {
+        	return breweries;
+        }
+
+        function getBrewery(id) {
+        	for(var i = 0; i < breweries.length; i++) {
+        		if(breweries[i]._id === id) {
+        			return breweries[i];
+        		}
+        	}
+        }
+
+        function removeBrewery(_id) {
+        	var removeIdx;
+        	angular.forEach(breweries, function(value, idx) {
+        		if(value._id === _id) {
+        			removeIdx = idx;
+        		}
+        	});
+        	if(removeIdx || removeIdx === 0) {
+        		breweries.splice(removeIdx, 1);
+        	}
+        }
+
+        function updateBrewery(_id, breweryStr) {
+        	angular.forEach(breweries, function(value, idx) {
+                if(value._id === _id) {
+                    breweries[idx] = angular.fromJson(breweryStr);
+                }
+            });
         }
     }
 })();

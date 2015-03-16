@@ -6,10 +6,10 @@
   		</div>
   		<div class="section">
 	  		<h1 class="center">Local Breweries</h1>
-	  		<!--
+	  		
 	  		<input ng-model="home.breweries[0].name"/>
 	  		<input ng-model="home.cityFilter.name"/>
-	  		-->
+	  		
 	  		<div class="city-filter">
 	  			<md-button ng-if="!!home.cityFilter" ng-click="home.setCityFilter()" class="clear-btn">Clear</md-button>
 	  			<md-button ng-repeat="city in home.cities" ng-click="home.setCityFilter(city)" class="{{ {true: 'selected'}[home.cityFilter.address.city === city] }}">{{city}}</md-button>

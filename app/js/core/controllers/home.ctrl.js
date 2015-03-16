@@ -31,6 +31,11 @@
 
         //////PRIVATE//////////////
 
+        /*
+            Separate out private functions from functions and data attached to the controller instance
+            to aid in readability and maintainability.
+         */
+        
         function activate() {
         	vm.breweries = BreweryService.getBreweries();
         	vm.cities = BreweryService.getCities();

@@ -10,7 +10,7 @@
         /*jshint validthis: true */
         var vm = this;
 
-        vm.input = {};
+        vm.input = {};    //ALL manipulatable data should be on Objects, and not vm.firstName, vm.lastName, etc, especially when working with $scope
         vm.message = null;
         vm.send = send;
 
@@ -25,7 +25,7 @@
         		vm.message = 'Successfully submitted the contact form.';
         		$timeout(function() {
         			vm.message = null;
-        		}, 5000)
+        		}, 5000);
         	}).error(function(response, status) {
         		vm.message = 'Error: error posting message: ' + status;
         	});

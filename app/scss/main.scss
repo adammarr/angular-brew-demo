@@ -1,12 +1,12 @@
 
 md-toolbar {
-	&, &.md-default-theme { background-color: rgba(255,255,255,.1); }
+	&:not(.tb-admin), &.md-default-theme:not(.tb-admin) { background-color: rgba(255,255,255,.1); }
 	h3 {
 		cursor: pointer;
 	}
+	&+md-content { top: -64px; }
 }
 md-content {
-	top: -64px;
 
 	&.full {
 		background: linear-gradient(to bottom, #421309, #421309 80%, rgba(255,255,255,0));

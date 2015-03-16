@@ -3,6 +3,8 @@
 
     angular
         .module('brew', [
-            'brew.core'
+            'brew.core',
+            'brew.admin',
+            'brewE2E'
         ]);
 })();

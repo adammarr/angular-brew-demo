@@ -15,6 +15,9 @@ var inject = require('gulp-inject');
 var rev = require('gulp-rev');
 var del = require('del');
 var plumber = require('gulp-plumber');
+var runSequence = require('run-sequence');
+var deleteLines = require('gulp-delete-lines');
+var karma = require('karma').server;
 
 var files = {
     vendorJS : [
@@ -26,7 +29,6 @@ var files = {
         'bower_components/angular-aria/angular-aria.min.js',
         'bower_components/angular-ui-router/release/angular-ui-router.min.js',
         'bower_components/angular-material/angular-material.min.js',
-        'bower_components/angular-mocks/angular-mocks.js',
         'bower_components/toastr/toastr.min.js'
     ],
     vendorCSS : [
@@ -49,6 +51,8 @@ var files = {
         'app/scss/*.scss'
     ]
 }
+
+/************** UTILITY *****************************************/
 
 // Lint Task
 gulp.task('lint', function() {
@@ -80,8 +84,18 @@ gulp.task('lint', function() {
     	}));
 });
 
+gulp.task('clean-maps', function() {
+    return del(['maps/*']);
+});
+
+gulp.task('clean', function() {
+    return del(['dist/*']);
+});
+
+/************** SASS *****************************************/
+
 // Compile Our Sass
-gulp.task('sass', function() {
+var doSass = function(doConcat) { 
 	var onError = function(err) {
         notify.onError({
                     title:    "Gulp Sass",
@@ -92,63 +106,51 @@ gulp.task('sass', function() {
         this.emit('end');
     };
 
+    var distPath = (doConcat) ? '.' : 'dist/css';
+
     //clean the css dest directory
-    del(['dist/css/*'], function() {
-        var cssfiles = gulp.src(files.scss)
-        	.pipe(plumber({errorHandler: onError}))
-            .pipe(sourcemaps.init())
-            .pipe(sass())
-            .pipe(autoprefixer())
-            .pipe(rev())
-            .pipe(sourcemaps.write('maps'))
-            .pipe(gulp.dest('dist/css'));
-
-        gulp.src('index.html')
-            .pipe(plumber({errorHandler: onError}))
-            .pipe(inject(cssfiles, {
-                read: false,
-                starttag: '<!-- app:css -->',
-                endtag: '<!-- endinject -->',
-                addRootSlash: false,  // ensures proper relative paths
-                ignorePath: '/build/' // ensures proper relative paths
-            }))
-            .pipe(gulp.dest('./'))
-            .pipe(notify({
-                title: 'SASS Files Complete',
-                message: 'Yay!'
-            }));
-    });
-});
-
-// Concatenate & Minify JS
-gulp.task('scripts-prod', function() {
-	var onError = function(err) {
-        notify.onError({
-                    title:    "Gulp Scripts",
-                    subtitle: "Failure!",
-                    message:  "Error: <%= err.message %>",
-                    sound:    "Beep"
-                })(err);
-        this.emit('end');
-    };
-
-    return gulp.src(files.js)
+    var cssfiles = gulp.src(files.scss)
     	.pipe(plumber({errorHandler: onError}))
-        .pipe(ngAnnotate())
-    	.pipe(sourcemaps.init())
-        .pipe(concat('rdeploy.temp.js'))
-        .pipe(gulp.dest('dist'))
-        .pipe(rename('rdeploy.min.js'))
-        .pipe(uglify())
-        .pipe(sourcemaps.write('maps'))
-        .pipe(gulp.dest('dist'))
+        .pipe(sourcemaps.init())
+        .pipe(sass());
+
+    if(doConcat) {
+        cssfiles = cssfiles.pipe(concat('dist/css/style.css'));
+    }
+
+    cssfiles = cssfiles
+        .pipe(autoprefixer())
+        .pipe(rev())
+        .pipe(sourcemaps.write('./maps'))
+        .pipe(gulp.dest(distPath + '/'));
+
+    return gulp.src('index.html')
+        .pipe(plumber({errorHandler: onError}))
+        .pipe(inject(cssfiles, {
+            read: false,
+            starttag: '<!-- app:css -->',
+            endtag: '<!-- endinject -->',
+            addRootSlash: false,  // ensures proper relative paths
+            ignorePath: '/build/' // ensures proper relative paths
+        }))
+        .pipe(gulp.dest('./'))
         .pipe(notify({
-			title: 'Scripts Complete',
-			message: 'Yay!'
-		}));
+            title: 'SASS Files Complete',
+            message: 'Yay!'
+        }));
+}
+
+gulp.task('sass', function() {
+    return doSass();
 });
 
-gulp.task('vendor-files', function() {
+gulp.task('sass-prod', function() {
+    return doSass(true);
+});
+
+/************** VENDOR *****************************************/
+
+var doVendor = function(doConcat) {
     var onError = function(err) {
         notify.onError({
                     title:    "Gulp Scripts",
@@ -161,6 +163,18 @@ gulp.task('vendor-files', function() {
 
     var jsfiles = gulp.src(files.vendorJS),
         cssfiles = gulp.src(files.vendorCSS);
+
+    if(doConcat) {
+        cssfiles = cssfiles
+            .pipe(concat('dist/lib/css/vendor.css'))
+            .pipe(rev())
+            .pipe(gulp.dest('./'));
+
+        jsfiles = jsfiles
+            .pipe(concat('dist/lib/js/vendor.js'))
+            .pipe(rev())
+            .pipe(gulp.dest('./'));
+    }
 
     return gulp.src('index.html')
         .pipe(plumber({errorHandler: onError}))
@@ -183,9 +197,24 @@ gulp.task('vendor-files', function() {
             title: 'Vendor Files Complete',
             message: 'Yay!'
         }));
+}
+
+gulp.task('vendor', function() {
+    return doVendor();
 });
 
-var doScripts = function(src) {
+gulp.task('vendor-mock', function() {
+    files.vendorJS.push('bower_components/angular-mocks/angular-mocks.js');
+    return doVendor();
+});
+
+gulp.task('vendor-prod', function() {
+    return doVendor(true);
+});
+
+/************** SCRIPTS *****************************************/
+
+var doScripts = function(src, doMin) {
     var onError = function(err) {
         notify.onError({
                     title:    "Gulp Scripts",
@@ -197,6 +226,21 @@ var doScripts = function(src) {
     };
 
     var jsfiles = gulp.src(src);
+
+    if(doMin) {
+        jsfiles = jsfiles
+            .pipe(plumber({errorHandler: onError}))
+            .pipe(ngAnnotate())
+            .pipe(sourcemaps.init())
+            .pipe(concat('dist/js/app.js'))
+            .pipe(deleteLines({
+                'filters' : [/(toastr|console)\.\S*/]
+            }))
+            .pipe(uglify())
+            .pipe(rev())
+            .pipe(sourcemaps.write('./maps'))
+            .pipe(gulp.dest('./'));
+    }
 
     return gulp.src('index.html')
         .pipe(plumber({errorHandler: onError}))
@@ -222,11 +266,43 @@ gulp.task('scripts-mock', function() {
     return doScripts(files.mockjs);
 });
 
+gulp.task('scripts-prod', function() {
+    return doScripts(files.js, true);
+});
+
+/************** TASK Groups *****************************************/
+
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch(files.js, ['lint', 'scripts']);
     gulp.watch(files.scss, ['sass']);
 });
 
+// Watch Files For Changes
+gulp.task('watch-mock', function() {
+    gulp.watch(files.mockjs, ['lint', 'scripts-mock']);
+    gulp.watch(files.scss, ['sass']);
+});
+
+//Testing with Karma
+gulp.task('test', function(cb) {
+    karma.start({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    }, function() {
+        if(cb) cb();
+    });
+});
+
 // Default Task
-gulp.task('default', ['lint', 'sass', 'scripts']);
+gulp.task('default', function(cb) {
+    runSequence('lint', 'clean-maps', 'clean', 'sass', 'scripts', 'vendor', cb);
+});
+
+gulp.task('mock', function(cb) {
+    runSequence('lint', 'clean-maps', 'clean', 'sass', 'scripts-mock', 'vendor-mock', cb);
+});
+
+gulp.task('prod', function(cb) {
+    runSequence('lint', 'clean-maps', 'clean', 'sass-prod', 'scripts-prod', 'vendor-prod', cb);
+});
