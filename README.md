@@ -31,7 +31,7 @@ use sudo **sudo npm i -g gulp** to execute as su.
 Create and navigate to the folder you wish to clone the git repo into.
 
 ```
-**git clone {{repo}}**
+git clone {{repo}}
 ```
 
 Copy the repo link from the github "clone URL" with HTTPS or SSH. For SSH you may need to first create and

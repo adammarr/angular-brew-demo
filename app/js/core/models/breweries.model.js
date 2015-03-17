@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function Breweries($resource) {
-        //user $resource to simplify CRUD calls to properly defined REST APIs
+        //use $resource to simplify CRUD calls to properly defined REST APIs
         //only 'PUT' is missing from the initial object creation, so add it below
         var service = $resource('/api/breweries/:id', { id : '@_id' }, {
         	update: {
