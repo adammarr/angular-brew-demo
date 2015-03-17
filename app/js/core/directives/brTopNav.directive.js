@@ -5,6 +5,13 @@
         .module('brew.core')
         .directive('brTopNav', brTopNav);
 
+    /*
+        Directive names should be prefaced with a 2 or 3 character prefix, unique to either
+        the application or company. In this case, the directive uses "br" for "brewery".
+        Avoid using angular prefixes like "ng" or other common third party prefixs, like "ui".
+        This lets people easily see that a custom directive is being used in the markup.
+     */
+
     /* @ngInject */
     function brTopNav () {
         // Usage:

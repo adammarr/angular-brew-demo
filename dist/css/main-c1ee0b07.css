@@ -1,25 +1,3 @@
-.edit-panel {
-  max-width: 1040px;
-  margin: 0 auto; }
-  .edit-panel > div:first-of-type {
-    border-right: 1px solid #ccc; }
-  .edit-panel .edit-list {
-    margin: 5px 0; }
-    .edit-panel .edit-list .active {
-      background-color: #259b24;
-      color: #fff; }
-    .edit-panel .edit-list .inactive {
-      background-color: #d0f8ce; }
-    .edit-panel .edit-list a {
-      display: none;
-      text-decoration: none;
-      color: #999; }
-    .edit-panel .edit-list:hover {
-      background-color: #eee; }
-      .edit-panel .edit-list:hover a {
-        display: block; }
-
-
 md-toolbar:not(.tb-admin), md-toolbar.md-default-theme:not(.tb-admin) {
   background-color: rgba(255, 255, 255, 0.1); }
 md-toolbar h3 {
@@ -125,4 +103,4 @@ footer {
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2); }
 
 
-/*# sourceMappingURL=../../maps/dist/css/style-4b2926f3.css.map */
+/*# sourceMappingURL=maps/main-c1ee0b07.css.map */

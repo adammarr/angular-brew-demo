@@ -1,0 +1,23 @@
+.edit-panel {
+  max-width: 1040px;
+  margin: 0 auto; }
+  .edit-panel > div:first-of-type {
+    border-right: 1px solid #ccc; }
+  .edit-panel .edit-list {
+    margin: 5px 0; }
+    .edit-panel .edit-list .active {
+      background-color: #259b24;
+      color: #fff; }
+    .edit-panel .edit-list .inactive {
+      background-color: #d0f8ce; }
+    .edit-panel .edit-list a {
+      display: none;
+      text-decoration: none;
+      color: #999; }
+    .edit-panel .edit-list:hover {
+      background-color: #eee; }
+      .edit-panel .edit-list:hover a {
+        display: block; }
+
+
+/*# sourceMappingURL=maps/admin-bc9719d5.css.map */

@@ -274,14 +274,14 @@ gulp.task('scripts-prod', function() {
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch(files.js, ['lint', 'scripts']);
-    gulp.watch(files.scss, ['sass']);
+    gulp.watch(files.js, ['lint', 'clean', 'clean-maps', 'scripts']);
+    gulp.watch(files.scss, ['clean', 'clean-maps', 'sass']);
 });
 
 // Watch Files For Changes
 gulp.task('watch-mock', function() {
-    gulp.watch(files.mockjs, ['lint', 'scripts-mock']);
-    gulp.watch(files.scss, ['sass']);
+    gulp.watch(files.mockjs, ['lint', 'clean', 'clean-maps', 'scripts-mock']);
+    gulp.watch(files.scss, ['clean', 'clean-maps', 'sass']);
 });
 
 //Testing with Karma
