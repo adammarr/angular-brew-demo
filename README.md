@@ -9,7 +9,7 @@ application.
 Slides: http://slides.com/adammarr/angular
 
 ##Setup and Installation
-Some prerequists are requires to setup and run this application
+Some prerequisites are requires to setup and run this application
 
 ```
 Install nodejs    https://nodejs.org/
@@ -20,28 +20,33 @@ Install karma     npm install -g karma-cli   (angular test framework)
 ```
 
 If you are behind a corporate firewall, see your company's instructions for configuring the proxies for
-each applciation above.
+each application above.
 
 On windows machines you may have to add node's "npm" AppData folder to your *PATH*. To test this, run
-**bower -v** and **gulp -v** from the command line. On a Mac, if you get EACCESS errors running **npm**
+**bower -v** and **gulp -v** from the command line to make sure you have command line access to those
+applications. On a Mac, if you get EACCESS errors running **npm**
 use sudo **sudo npm i -g gulp** to execute as su.
 
 ##Fetch git repo
 Create and navigate to the folder you wish to clone the git repo into.
->**git clone {{repo}}**
+
+```
+**git clone {{repo}}**
+```
+
 Copy the repo link from the github "clone URL" with HTTPS or SSH. For SSH you may need to first create and
 configure local SSH keys. https://help.github.com/articles/generating-ssh-keys/
 
 You can also fork this repo into your own github account.
 
 ##Initialize
-Once the git repo is on your local machine, it is time to initialize all the assets. Run: **npm install** from directory
+Once the git repo is on your local machine, it is time to initialize all the assets. Run: **npm install** from the directory
 where *package.json* is installed. Node can be configured to kick of bower on npm install complete. For now, kick off
-bower manually **bower install**. Once all the assets are initialized, run gulp **gulp mock**. To watch files for changes
-run gulp watch-mock.
+bower manually: **bower install**. Once all the assets are initialized, run gulp: **gulp mock**. To watch files for changes
+during development run: **gulp watch-mock**.
 
 ##Hosting
-Any web container for hosting should work. As a preference, I prefer to host web apps out of apache using vhosts, an example
+Any web container for hosting should work. As a preference, I prefer to host web apps out of apache using vhosts. An example
 vhost config is below - replace the paths as needed, you'll also need to ensure mod_rewrite is enabled:
 
 ```
@@ -64,17 +69,27 @@ vhost config is below - replace the paths as needed, you'll also need to ensure 
 </VirtualHost>
 ```
 
-Then add **127.0.0.1	brewdemo.local** to your OS hosts file.
+Then add the following to your OS hosts file:
 
-When using the preinstalled apache server on a Mac, you may need to set folder permissions so the _www user has access.
+```
+127.0.0.1	  brewdemo.local
+```
+
+When using the preinstalled apache server on a Mac, you may need to set folder permissions so the _www user has proper access.
 
 ##Building with Gulp
 There are 3 primary build task groups with this applications gulpfile.
-1. **gulp mock** build with included mock module, and angular-mocks.js. This would only be needed while a backend was being developed.
+
+1. **gulp mock** build with included mock module and angular-mocks.js. This would only be needed while a backend was being developed.
 2. **gulp** (default) the normal development build, assuming a backend was present.
 3. **gulp prod** the fully minified and concat'd version, for building on a CI server, and deploying to Test and Prod environments.
 
-As stated above, only **gulp mock** will generate a working application in this case. The others are included only for reference.
+As stated above, only **gulp mock** will generate a working application in this case, since there is no backend application. The
+others are included only for reference.
+
+##Testing
+If you installed *karma*, running tests is as easy as running **gulp test**. You can also use **karma** from the command line with
+the appropriate configuration.
 
 ##Style Guide
 This application follows arguably the best style guide for building scalable angular applications: https://github.com/johnpapa/angular-styleguide
